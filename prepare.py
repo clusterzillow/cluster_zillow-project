@@ -45,15 +45,9 @@ def prep_zillow(df):
     df = df.fillna(0)
     #making decade into a int
     df.Decade = df.Decade.astype(int)
-    #location split area codes 
-    df['location'] = df.Fips.map({6037: 'Los_Angeles', 6059: 'Orange', 6111:'Ventura'})
-    dummies = pd.get_dummies(df.Fips)
-    df = pd.concat([df, dummies], axis=1)
-    df = df.drop(columns='Fips')
+    df['county'] = df.Fips.apply(lambda x: 'orange' if x == 6059.0 else 'los_angeles' if x == 6037.0 else 'ventura')
     #re arrange the columns back into place
-    df.columns=['Bedrooms','Bathrooms','Squarefeet','TaxesTotal','Year','County','Zip','latitude','longitude','Log_error','Taxamount','TotalRooms','Decade','location' ,'los_angeles', 'orange', 'ventura']
-    #converted into a int
-    df.los_angeles = df.los_angeles.astype(int)
+    df.columns=['Bedrooms','Bathrooms','Squarefeet','TaxesTotal','Year','Fips','County','Zip','latitude','longitude','Log_error','Taxamount','TotalRooms','Decade','location']
     return df
      
 
@@ -178,9 +172,9 @@ def scale_data(train, val, test, cols_to_scale):
 def model_setup(train_scaled, train, val_scaled, val, test_scaled, test):
 
     # Set up X and y values for modeling
-    X_train, y_train = train_scaled.drop(columns=['TaxesTotal','location','Decade']), train.TaxesTotal
-    X_val, y_val = val_scaled.drop(columns=['TaxesTotal','location','Decade']), val.TaxesTotal
-    X_test, y_test = test_scaled.drop(columns=['TaxesTotal','location','Decade']), test.TaxesTotal
+    X_train, y_train = train_scaled.drop(columns=['Log_error','location','Decade']), train.Log_error
+    X_val, y_val = val_scaled.drop(columns=['Log_error','location','Decade']), val.Log_error
+    X_test, y_test = test_scaled.drop(columns=['Log_error','location','Decade']), test.Log_error
 
     # make them a dataframes
     y_train = pd.DataFrame(y_train)
