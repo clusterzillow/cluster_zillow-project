@@ -142,13 +142,13 @@ This would help all of us on understanding how and why our single family propert
 
 `Recommendations:`
 
-•Addding more data about the areas surronding the houses for example School,Malls,parks,rivers,lakes,hills,views, and much more so would could obtain a more accurate model.
+•Adding more data about the areas surrounding the houses for example School, Malls, parks, rivers, lakes, hills, views, and much more so would could obtain a more accurate model.
 
 •Would love to keep the cost of something the same but when something is in high demand usually means price would increase. 
 
 `Next Steps:`
 
-• I would love to dive into more column in the zillow data set. How a room squarefeet could effect the house more then a basic rooom or how a garage could add more value then a pool??. This data has so much potential but i would just be digging myself into a rabbit hole.
+• I would love to dive into more column in the zillow data set. How a room squarefeet could effect the house more then a basic rooom or how a garage could add more value then a pool??. This data has so much potential but also needs more relevant(School data, crime data, etc...)data points but with so many missing values I would just be digging myself into a rabbit hole.
 
 • I would check 2018 and see how the market has change from the 2017 market of single families houses
 
