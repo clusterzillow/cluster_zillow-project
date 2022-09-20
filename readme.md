@@ -161,7 +161,7 @@ This would help all of us on understanding how and why our single family propert
 
 • In conclusion log error could be effect by many columns and many things so what should we do ?
 
-• We could conclude that the Polynomial Modellinear regression model perform the best with a Test_rmse	0.167348
+• We could conclude that the `Polynomial Modellinear regression model` perform the best with a Test_rmse	0.168972
 
 
 `Recommendations:`
