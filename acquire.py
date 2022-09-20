@@ -25,8 +25,8 @@ def clean_zillow():
 
     return df
 
+#use to acquire from sql 
 def sqlclean_zillow():
-    '''This function connects with the database and returns a Pandas dataframe '''
     query = """
     SELECT bedroomcnt,bathroomcnt,calculatedfinishedsquarefeet,taxvaluedollarcnt,yearbuilt
     ,fips,regionidcounty,regionidzip,numberofstories,latitude,longitude,logerror,taxamount FROM properties_2017

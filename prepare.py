@@ -50,27 +50,6 @@ def prep_zillow(df):
     df.columns=['Bedrooms','Bathrooms','Squarefeet','TaxesTotal','Year','Fips','County','Zip','latitude','longitude','Log_error','Taxamount','TotalRooms','Decade','location']
     return df
      
-
-def remove_outliers(df, k, col_list):
-    ''' remove outliers from a list of columns in a dataframe 
-        and return that dataframe
-    '''
-    
-    for col in col_list:
-
-        q1, q3 = df[col].quantile([.25, .75])  # get quartiles
-        
-        iqr = q3 - q1   # calculate interquartile range
-        
-        upper_bound = q3 + k * iqr   # get upper bound
-        lower_bound = q1 - k * iqr   # get lower bound
-
-        # return dataframe without outliers
-        
-        df = df[(df[col] > lower_bound) & (df[col] < upper_bound)]
-        
-    return df
-
 def my_train_test_split(df):
     '''
     Takes in a dataframe and target (as a string). Returns train, validate, and test subset 
@@ -83,72 +62,11 @@ def my_train_test_split(df):
 
 
 
-def prepare_zillow_train(df, target, col_list):
-    # remove all outliers from dataset
-    df = remove_outliers(df, 1.5, col_list)    
-    # splitting data into train, validate, test
-    train_validate, test = train_test_split(df, test_size=.2, random_state=123)
-    train, validate = train_test_split(train_validate, test_size=.3, random_state=123)
-    
-    train_scaled = train.copy()
-    validate_scaled = validate.copy()
-    test_scaled = test.copy()
-    
-    columns_to_scale = col_list
-    
-    #     make the thing
-    scaler = MinMaxScaler()
-    #     fit the thing
-    scaler.fit(train[columns_to_scale])
-    # applying the scaler:
-    train_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(train[columns_to_scale]),
-                                                  columns=train[columns_to_scale].columns.values).set_index([train.index.values])
-                                                  
-    validate_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(validate[columns_to_scale]),
-                                                  columns=validate[columns_to_scale].columns.values).set_index([validate.index.values])
-    
-    test_scaled[columns_to_scale] = pd.DataFrame(scaler.transform(test[columns_to_scale]),
-                                                 columns=test[columns_to_scale].columns.values).set_index([test.index.values])
-    
-    # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train_scaled.drop(columns=[target])
-    y_train = train_scaled[target]
-
-    # split validate into X (dataframe, drop target) & y (series, keep target only)
-    X_validate = validate_scaled.drop(columns=[target])
-    y_validate = validate_scaled[target]
-
-    # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test_scaled.drop(columns=[target])
-    y_test = test_scaled[target]
-    
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
-
-
-
-
-def wrangle_zillow():
-
-    train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test = prepare_zillow_train(prepare.prep_zillow(acquire.sqlclean_zillow()))
-
-    return train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test
-
-def impute_mode(train, validate, test, col):
-    '''
-    Takes in train, validate, and test as dfs, and column name (as string) and uses train 
-    to identify the best value to replace nulls in embark_town
-    
-    Imputes the most_frequent value into all three sets and returns all three sets
-    '''
-    imputer = SimpleImputer(strategy='most_frequent')
-    imputer = imputer.fit(train[[col]])
-    train[[col]] = imputer.transform(train[[col]])
-    validate[[col]] = imputer.transform(validate[[col]])
-    test[[col]] = imputer.transform(test[[col]])
-    
-    return train, validate, test
-
 def scale_data(train, val, test, cols_to_scale):
+    '''scaled the data by creating train_scaled val_scaled test_scaled
+    copying from orginal train,test,val
+    fitting 
+    creating a dataframe from the data '''
     train_scaled = train.copy()
     val_scaled = val.copy()
     test_scaled = test.copy()
@@ -170,11 +88,12 @@ def scale_data(train, val, test, cols_to_scale):
 
 
 def model_setup(train_scaled, train, val_scaled, val, test_scaled, test):
+    '''mdoel from train test val'''
 
     # Set up X and y values for modeling
-    X_train, y_train = train_scaled.drop(columns=['Log_error','location','Decade']), train.Log_error
-    X_val, y_val = val_scaled.drop(columns=['Log_error','location','Decade']), val.Log_error
-    X_test, y_test = test_scaled.drop(columns=['Log_error','location','Decade']), test.Log_error
+    X_train, y_train = train_scaled.drop(columns=['TaxesTotal','location','Decade']), train.TaxesTotal
+    X_val, y_val = val_scaled.drop(columns=['TaxesTotal','location','Decade']), val.TaxesTotal
+    X_test, y_test = test_scaled.drop(columns=['TaxesTotal','location','Decade']), test.TaxesTotal
 
     # make them a dataframes
     y_train = pd.DataFrame(y_train)
