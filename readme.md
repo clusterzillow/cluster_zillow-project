@@ -6,7 +6,7 @@ by cristian ibarra
 
 # Project Goals:
 
-Find drivers for single families house on what effect house market?
+Find drivers for single families house on what effect the amount of log error?
 
 Deliver a report that a non-data scientist can read through and understand what steps were taken, why and what was the outcome?
 
@@ -45,40 +45,48 @@ Step 7: Deploying the Model.
 
 •Document conclusions, takeaways, and next steps in the Final Report Notebook.
 
-# Hypotheses:
-`Hypothesis(1)-Do bedrooms increase price:`
+#  Hypotheses:
+`Hypothesis(1)-Does Los angelos county effect log error more the orange county?:`
 
-Ho-Does more Bed rooms increase the cost of the houses?
+Ho-Los angelos has a higer log error  then Orange county
 
-Ha-Bed rooms has no effect on pricing of house
+Ha-Orange county has a higher log error then Los Angelos
 
-`Hypothesis(2)-Does squarefeet effect cost of housing:`
+`Hypothesis(2)-Does Ventura county effect log error more then Orange county?:`
 
-Ho-Would the amount of squarefeet effect the cost of housing?
+Ho-Ventura county has a higher log error then Orange county 
 
-Ha-squarefeet as no effect on housing
+Ha-Ventura county has a lower log error then Orange county
 
 
-`Hypothesis(3)-What decade does the market love:`
+`Hypothesis(3)-Do Bedrooms have a big effect on log error:`
 
-Ho-Would decade effect total cost of the house ?
+Ho-Does more Bed rooms increase the log error?
 
-Ha-Decade has no effect on total cost of market 
+Ha-Bed rooms has no effect on log error 
 
-`Hypothesis(4)-Do Bathrooms have a big effect on pricing:`
+`Hypothesis(4)-Do Bathrooms have a big effect on Log error:`
 
-Ho-Does more bathrooms increase the cost of the houses?
+Ho-Does more bathrooms increase the amount of log error?
 
-Ha-Bathrooms has no effect on pricing of house
+Ha-Bathrooms has no effect on the amount of log error
 
-`Hypothesis(5)-Does county have a impact on taxtotal:`
+`Hypothesis(5)-Does logerror and squarefeet have a relationship?:`
 
-Ho-Does county have a impact on taxtotal?
+Ho-Does Squarefeet effect log error ?
 
-Ha-county doesnt have a impact on taxtotal
+Ha-Squarefeet doesnt effect log error
 
 # Goal:
-Find what're key drivers on property value for single family properties???
+Find what're key drivers of log error for single family properties???
+
+# Questions:
+
+• What effect log error on single families houses/properties?
+
+• How does log error increase?
+
+• Can we lower the chance of log error happening with single families properties?
 
 # Data Dictionary/Findings:
 
@@ -98,9 +106,9 @@ Find what're key drivers on property value for single family properties???
 |TotalRooms|N/A|float|bathrooms and bedrooms combined 
 |location|N/A|object|area houses are located in 
 |Decade|N/A|int   |Years slice into half a centary|
-|los_angelos|N/A|int|1 for yes and 0 for no
-|orange|N/A|int|1 for yes and 0 for no
-|ventura|N/A|int|1 for yes and 0 for no
+|Fips|fips|float|area code
+|Taxamount|taxcnt|float|total taxes value
+|Log_error|logerror|float|error
 
 # Modeling:
 
@@ -108,49 +116,79 @@ Find what're key drivers on property value for single family properties???
 # VALIDATE:
 |MODEL | Val_rmse| Val_r2 |
 | ----- | ----- | ----- |
-|Lars_alpha(2)|223655.138918|0.268033|
-|Depth(1) |223670.191995|0.267934|
-|Depth(2) |218523.795577|0.301213|
-
+|Lars_alpha(2)|0.147947|-2.220446e-16|
+|Depth(1) |0.147602|4.661078e-03|
+|Depth(2) |0.153362|-7.462189e-02|
+|Depth(3)|0.180317|-0.241792|
+|Depth(4)|0.175488|-0.176156|
 
 
 # TRAIN:
 |MODEL | Train_rmse |Train_r2|
 | ----- | ----- | ----- |
-|Lars_alpha(2)|220486.586943|0.288122|
-|Depth(1)|220490.325968|0.288098|
-|Depth(2)|215830.734471|0.317869|
+|Lars_alpha(2)|0.170916|0.000000|
+|Depth(1)|0.170750|0.001945|
+|Depth(2)|0.170306|0.007124|
+|Depth(3)|0.165625|0.020978|
+|Depth(4)|0.165686|0.020261|
+
+
+# Test: 
+|MODEL | Test_rmse |Test_r2|
+| ----- | ----- | ----- |
+|depth(2)|0.166253|-0.004567|
 
 # Project description
 1)Why this project-
-This project would help determind what're the main key aspect of prices increase in single family properties thru out the centuries.
+This project would help determind what're the main key aspect of Log error in single family properties thru out the centuries.
 
 2)Why is important-
-So we could predict the price increase of single family properties
+So we could predict the log error of single family properties and decrease the amount of error made.
 
 3)How does this help you- 
-This would help all of us on understanding how and why our single family properties are increasing in high rate.
+This would help all of us on understanding how and why our single family properties have so much log error.
 
 # Conclusion/Recommnedations/Next Steps:
 `Conclusion:`
 
-• We could conclude that bedrooms,bathrooms,decade,county,location,squarefeet have a effect on taxtotal
+• We could conclude that bedrooms,bathrooms,decade,county,location,squarefeet have a effect on log error
 
-• In conclusion tax total could be effect by many columns and many things so what should we do ?
+• In conclusion log error could be effect by many columns and many things so what should we do ?
 
-• We could conclude that the linear regression model perform the best with a r rate of .31
+• We could conclude that the Polynomial Modellinear regression model perform the best with a Test_rmse	0.167348
+
 
 `Recommendations:`
 
-•Adding more data about the areas surrounding the houses for example School, Malls, parks, rivers, lakes, hills, views, and much more so would could obtain a more accurate model.
+•Addding more data about the areas surronding the houses for example School,Malls,parks,rivers,lakes,hills,views, and much more so would could obtain a more accurate model.
 
-•Would love to keep the cost of something the same but when something is in high demand usually means price would increase. 
+•Would love to keep the cost of something the same but when something is in high demand usually means more houses would sell meaning more log error to happened. 
 
 `Next Steps:`
 
-• I would love to dive into more column in the zillow data set. How a room squarefeet could effect the house more then a basic rooom or how a garage could add more value then a pool??. This data has so much potential but also needs more relevant(School data, crime data, etc...)data points but with so many missing values I would just be digging myself into a rabbit hole.
+• I would love to dive into more column in the zillow data set. How a room squarefeet could effect log error more then a basic rooom or how a garage could add more log error then a pool??. This data has so much potential but i would just be digging myself into a rabbit hole.
 
-• I would check 2018 and see how the market has change from the 2017 market of single families houses
+• I would check 2018 and see how much log error has change from the 2017 data of single families houses
+
+# Steps to reproduce finalnotebook:
+zillow data set was collected from codeup server.Using this data to find key driver for log error while using clusters 
+
+1)Download the following files 
+
+• Acquire.py
+
+• Prepare.py
+
+• Modeling.py
+
+• Cluster.py
+
+• finalnotebook.pynd
+
+2) After downloading files make sure all files are in the same folder or location 
+
+3) Onces step two and step one are done you would be able to run finalnotebook without errors and on your own 
+
 
 # Deliverables:
 To access the correct MySQL database, you will need credentials to access to the CodeUp database. This database is accessed in this project via an env.py file. Add the below to your env.py and fill in your individual access information as strings:
