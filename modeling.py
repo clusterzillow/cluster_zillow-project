@@ -174,7 +174,7 @@ def Modeling_function(X_train, y_train, X_val, y_val):
 def modeling_best(X_train, y_train, X_val, y_val, X_test, y_test):
     ''''modeling the best model aka polynomial feature degree 2'''
     # set up the model
-    pf = PolynomialFeatures(degree=2)
+    pf = PolynomialFeatures(degree=1)
     X_train_d2 = pf.fit_transform(X_train)
     X_val_d2 = pf.transform(X_val)
     X_test_d2 = pf.transform(X_test)
@@ -462,7 +462,10 @@ def county_log3(train):
     sns.rugplot(data=train, x="Log_error", y="Log_error",hue='location')
     plt.title('Difference in logerror across counties')
     plt.show()
+
     
+#bedrooms graph
+
 def bedrooms_log(train):
     '''log error compared to bedrooms'''
     brush = alt.selection(type='interval')
@@ -484,6 +487,8 @@ def bedrooms_log1(train):
     plt.title('Difference in logerror for Bedrooms')
     plt.show()
     
+#bathroom graph
+    
 def bathrooms_log(train):
     '''log error compared to bathrooms'''
     plt.figure(figsize=(17,10))
@@ -497,6 +502,8 @@ def bathrooms_log1(train):
     sns.violinplot(data=train,x='Bathrooms', y='Log_error',hue='location' )
     plt.title('Difference in logerror for bathrooms')
     plt.show()
+    
+#squarefeet graph
     
 def Squarefeet_log(train):
     '''squarefeet compared to log error '''

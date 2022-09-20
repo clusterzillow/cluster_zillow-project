@@ -116,31 +116,40 @@ Find what're key drivers of `log error` for single family properties???
 
 # Modeling:
 
+|Model|Train_rmse|Train_r2|Val_rmse|Val_r2|
+| ----- | ----- | ----- |----- |----- |
+|baseline_mean|0.169201|0.000000|0.155290|0.000000
+|Lars_alpha(2)|0.169201|0.000000|0.155290|0.000000
+|Depth(1)|0.169032|0.001990|0.155020|0.003439
+|Depth(2)|0.168615|0.006912|0.158486|-0.041656
+|Depth(3)|0.167665|0.018067|0.826171|-27.312878
+|Depth(4)|0.167879|0.015562|0.240463|-1.398220
+
 ---
 # VALIDATE:
 |MODEL | Val_rmse| Val_r2 |
 | ----- | ----- | ----- |
-|Lars_alpha(2)|0.155525|0.000000|
-|Depth(1) |0.155299|0.002865|
-|Depth(2) |0.155543|-0.000255|
-|Depth(3)|0.409841|-5.944546|
-|Depth(4)|0.430149|-6.649857|
+|Lars_alpha(2)|0.155290|0.000000
+|Depth(1) |0.155020|0.003439
+|Depth(2) |0.158486|-0.041656
+|Depth(3)|0.826171|-27.312878
+|Depth(4)|0.240463|-1.398220
 
 
 # TRAIN:
 |MODEL | Train_rmse |Train_r2|
 | ----- | ----- | ----- |
-|Lars_alpha(2)|0.170068|0.000000|
-|Depth(1)|0.169839|0.002691|
-|Depth(2)|0.169448|0.007284|
-|Depth(3)|0.168102|0.022991|
-|Depth(4)|0.168540|0.017895|
+|Lars_alpha(2)|0.169201|0.000000
+|Depth(1)|0.169032|0.001990
+|Depth(2)|0.168615|0.006912
+|Depth(3)|0.167665|0.018067
+|Depth(4)|0.167879|0.015562
 
 
 # Test: 
 |MODEL | Test_rmse |Test_r2|
 | ----- | ----- | ----- |
-|depth(2)|0.168972|-0.014217|
+|Depth(2)|0.170413|0.002540|
 
 <hr style="border-bottom: 10px groove brown; margin-top: 1px; margin-bottom: 1px"></hr>
 
@@ -161,7 +170,8 @@ This would help all of us on understanding how and why our single family propert
 
 • In conclusion log error could be effect by many columns and many things so what should we do ?
 
-• We could conclude that the `Polynomial Modellinear regression model` perform the best with a Test_rmse	0.168972
+• We could conclude that the `Polynomial Modellinear regression model` perform the best with a Test_rmse	0.170413
+
 
 
 `Recommendations:`

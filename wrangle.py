@@ -183,9 +183,9 @@ def model_setup(train_scaled, train, val_scaled, val, test_scaled, test):
     '''mdoel from train test val'''
 
     # Set up X and y values for modeling
-    X_train, y_train = train_scaled.drop(columns=['TaxesTotal','location','Decade']), train.TaxesTotal
-    X_val, y_val = val_scaled.drop(columns=['TaxesTotal','location','Decade']), val.TaxesTotal
-    X_test, y_test = test_scaled.drop(columns=['TaxesTotal','location','Decade']), test.TaxesTotal
+    X_train, y_train = train_scaled.drop(columns=['Log_error','location','Decade']), train.Log_error
+    X_val, y_val = val_scaled.drop(columns=['Log_error','location','Decade']), val.Log_error
+    X_test, y_test = test_scaled.drop(columns=['Log_error','location','Decade']), test.Log_error
 
     # make them a dataframes
     y_train = pd.DataFrame(y_train)
