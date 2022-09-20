@@ -1,6 +1,8 @@
 ![Zillow-Group-Brand-Logos_010422-01.png](attachment:Zillow-Group-Brand-Logos_010422-01.png)
 
 
+# <hr style="border-bottom: 10px groove brown; margin-top: 1px; margin-bottom: 1px"></hr>
+
 # Zillow_ Project
 by cristian ibarra 
 
@@ -78,7 +80,7 @@ Ho-Does Squarefeet effect log error ?
 Ha-Squarefeet doesnt effect log error
 
 # Goal:
-Find what're key drivers of log error for single family properties???
+Find what're key drivers of `log error` for single family properties???
 
 # Questions:
 
@@ -87,6 +89,8 @@ Find what're key drivers of log error for single family properties???
 • How does log error increase?
 
 • Can we lower the chance of log error happening with single families properties?
+
+# <hr style="border-bottom: 10px groove brown; margin-top: 1px; margin-bottom: 1px"></hr>
 
 # Data Dictionary/Findings:
 
@@ -116,27 +120,29 @@ Find what're key drivers of log error for single family properties???
 # VALIDATE:
 |MODEL | Val_rmse| Val_r2 |
 | ----- | ----- | ----- |
-|Lars_alpha(2)|0.147947|-2.220446e-16|
-|Depth(1) |0.147602|4.661078e-03|
-|Depth(2) |0.153362|-7.462189e-02|
-|Depth(3)|0.180317|-0.241792|
-|Depth(4)|0.175488|-0.176156|
+|Lars_alpha(2)|0.155525|0.000000|
+|Depth(1) |0.155299|0.002865|
+|Depth(2) |0.155543|-0.000255|
+|Depth(3)|0.409841|-5.944546|
+|Depth(4)|0.430149|-6.649857|
 
 
 # TRAIN:
 |MODEL | Train_rmse |Train_r2|
 | ----- | ----- | ----- |
-|Lars_alpha(2)|0.170916|0.000000|
-|Depth(1)|0.170750|0.001945|
-|Depth(2)|0.170306|0.007124|
-|Depth(3)|0.165625|0.020978|
-|Depth(4)|0.165686|0.020261|
+|Lars_alpha(2)|0.170068|0.000000|
+|Depth(1)|0.169839|0.002691|
+|Depth(2)|0.169448|0.007284|
+|Depth(3)|0.168102|0.022991|
+|Depth(4)|0.168540|0.017895|
 
 
 # Test: 
 |MODEL | Test_rmse |Test_r2|
 | ----- | ----- | ----- |
-|depth(2)|0.166253|-0.004567|
+|depth(2)|0.168972|-0.014217|
+
+<hr style="border-bottom: 10px groove brown; margin-top: 1px; margin-bottom: 1px"></hr>
 
 # Project description
 1)Why this project-
